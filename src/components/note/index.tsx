@@ -3,14 +3,13 @@ import { View, Text } from "react-native"
 
 interface NoteProps
 {
-    id: string;
     title: string;
     content: string;
 }
 
 function Note(props: NoteProps)
 {
-    const {id, title, content} = props
+    const {title, content} = props
     const [shortenedContent, setShortenedContent] = useState<string>()
 
     useEffect(() =>
@@ -20,7 +19,7 @@ function Note(props: NoteProps)
 
     return(
         <View style={{width: '100%', height: '100%', 
-        borderRadius: 15, padding: 15, backgroundColor: '#ffff99'}}>
+        borderRadius: 15, paddingLeft: 15, paddingRight: 15, paddingBottom: 40, backgroundColor: '#ffff99'}}>
             <Text style={{fontWeight: 'bold', color: 'black', fontSize: 25}}>
                 {title}
             </Text>

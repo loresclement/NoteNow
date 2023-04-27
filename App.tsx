@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import 'react-native-gesture-handler';
 import HomeScreen from './src/screens/home';
 import AddNoteScreen from './src/screens/addNote';
 
@@ -19,3 +19,10 @@ function App() {
 }
 
 export default App; 
+
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
