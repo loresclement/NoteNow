@@ -58,6 +58,7 @@ function AddNote()
 
     const cancel = () => 
     {
+        saveNote()
         navigation.navigate("Home" as never)
     }
 
@@ -158,7 +159,7 @@ function AddNote()
                                       style={{width: '100%', height: 100}}>
                 <View style={{flex: 1}}>
                     <TextInput
-                        style={{fontSize: 30, margin: 10, textAlign: 'left'}}
+                        style={{fontSize: 30, margin: 10, textAlign: 'left', color: 'black'}}
                         ref={titleInputRef}
                         value={title}
                         multiline={true}
@@ -171,11 +172,11 @@ function AddNote()
             </TouchableWithoutFeedback>
 
             <View style={{marginLeft: 10, marginBottom: 5}}>
-                <Text>
+                <Text style={{color: 'gray'}}>
                     {loadedNote !== undefined && ('Created :' + dayjs(loadedNote["creation-date"]).format('DD/MM/YYYY HH[h]mm'))}  
                 </Text> 
                 
-                <Text>
+                <Text style={{color: 'gray'}}>
                     {loadedNote !== undefined && ('Modified :' + dayjs(loadedNote["modification-date"]).format('DD/MM/YYYY HH[h]mm'))}  
                 </Text>
             </View>

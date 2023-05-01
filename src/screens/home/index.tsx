@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Vibration } from "react-native";
 import Note from "../../components/note";
 import { ScrollView } from "react-native-gesture-handler";
 import PlusLogo from "../../logos/plus.svg"
@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import StorageService from "../../../utils/storageService";
 import { StackNavigationProp } from "@react-navigation/stack";
+import Popup from "../../components/popup";
 
 export type RootStackParamList = {
     Add: { noteId: string } | undefined;
@@ -14,6 +15,8 @@ export type RootStackParamList = {
 function Home()
 {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const [deletePopupVisible, setDeletePopupVisible] = useState(false)
+    const [selectedNoteId, setSelectedNoteId] = useState<string>()
 
     interface Note {
         id: string;
@@ -74,6 +77,22 @@ function Home()
         navigation.navigate('Add', {noteId})
     }
 
+    function deleteNote(response: boolean)
+    {
+        setDeletePopupVisible(false)
+
+        if(response)
+        {
+            saveInStorage(noteList.filter(item => item.id !== selectedNoteId))
+        }
+    }
+
+    async function saveInStorage(noteList: Note[])
+    {
+        await StorageService.storeData("note", noteList)
+        navigation.navigate("Home" as never)
+    }
+
     //const [drawerOpen, setDrawerOpen] = useState(false)
 
     return(
@@ -116,7 +135,7 @@ function Home()
                     </Text>}
                     {noteList.map((note) => 
                         <TouchableOpacity key={note.id} style={{width: '45%', margin: 10, height: 190}}
-                                          onPress={() => addNote(note.id)}>
+                                          onPress={() => addNote(note.id)} onLongPress={() => { setDeletePopupVisible(true); Vibration.vibrate(100); setSelectedNoteId(note.id)} }>
                             <Note
                             title={note.title} 
                             content={note.content}/>
@@ -131,6 +150,8 @@ function Home()
                             borderRadius: 50, padding: 15}}>
                 <PlusLogo width={50} height={50}/>
         </TouchableOpacity>
+
+        {deletePopupVisible && <Popup visible={deletePopupVisible} callback={deleteNote}/>}
 
     {/*</Drawer>*/}
         </>

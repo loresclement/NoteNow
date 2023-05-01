@@ -36,13 +36,13 @@ const Popup = (props: PopupProps) => {
         >
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
             <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10 }}>
-            <Text>Do you want to delete ?</Text>
+            <Text style={{color: 'black'}}>Do you want to delete ?</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
-                <TouchableOpacity onPress={handlePressYes}>
-                <Text>Yes</Text>
+                <TouchableOpacity onPress={handlePressNo} style={{padding: 10}}>
+                    <Text style={{color: 'black'}}>No</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handlePressNo}>
-                <Text>No</Text>
+                <TouchableOpacity onPress={handlePressYes} style={{padding: 10}}>
+                    <Text style={{color: 'black'}}>Yes</Text>
                 </TouchableOpacity>
             </View>
             </View>
