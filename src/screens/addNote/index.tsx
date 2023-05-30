@@ -145,16 +145,6 @@ function AddNote()
                 </View>
             </View>
 
-            <View style={{width: 0, height: 0, overflow: 'hidden'}}>
-                <TextInput
-                    ref={titleInputRef}
-                    value={title}
-                    onChangeText={setTitle}
-                    autoFocus={true}
-                    maxLength={30}
-                />
-            </View>
-
             <TouchableWithoutFeedback
                                       style={{width: '100%', height: 100}}>
                 <View style={{flex: 1}}>
@@ -164,7 +154,6 @@ function AddNote()
                         value={title}
                         multiline={true}
                         onChangeText={setTitle}
-                        autoFocus={true}
                         placeholder="Title..."
                         maxLength={30}
                     />
@@ -186,20 +175,17 @@ function AddNote()
                 <View style={{height: 4, width: '90%',  borderRadius: 50,backgroundColor: 'lightgray'}}/>
             </View>
 
-            <TouchableWithoutFeedback onPress={() => contentInputRef?.current?.focus()}
-                                      style={{width: '100%', height: '100%'}}>
-                <ScrollView>
-                    <TextInput
-                        style={{fontSize: 15, margin: 10, color: 'black', height: '100%'}}
-                        ref={contentInputRef}
-                        value={content}
-                        multiline={true}
-                        onChangeText={setContent}
-                        autoFocus={false}
-                        placeholder="Note..."
-                    />
-                </ScrollView>
-            </TouchableWithoutFeedback>
+            <ScrollView>
+                <TextInput
+                    style={{fontSize: 15, margin: 10, color: 'black', height: '100%'}}
+                    ref={contentInputRef}
+                    value={content}
+                    multiline={true}
+                    onChangeText={setContent}
+                    autoFocus={false}
+                    placeholder="Note..."
+                />
+            </ScrollView>
 
             {deletePopupVisible && <Popup visible={deletePopupVisible} callback={deleteNote}/>}
         </View>
